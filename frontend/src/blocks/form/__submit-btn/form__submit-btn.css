@@ -1,0 +1,21 @@
+.form__submit-btn {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 2px;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  font-size: .875rem;
+  cursor: pointer;
+  transition: .4s;
+}
+
+.form__submit-btn:hover {
+  opacity: 80%;
+}
+
+@media screen and (min-width: 768px) {
+  .form__submit-btn {
+    font-size: 1.125rem;
+  }
+}

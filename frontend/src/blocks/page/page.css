@@ -1,0 +1,6 @@
+.page {
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #000;
+  box-sizing: border-box;
+}

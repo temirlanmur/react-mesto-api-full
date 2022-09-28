@@ -1,0 +1,16 @@
+.form__text-input {
+  width: 100%;
+  margin: 0;
+  padding: 0 0 13px 0;
+  background-color: transparent;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  font-size: .875rem;
+  color: inherit;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.form__text-input:focus {
+  outline: none;
+}

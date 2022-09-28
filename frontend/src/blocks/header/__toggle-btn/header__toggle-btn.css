@@ -1,0 +1,26 @@
+.header__toggle-btn {
+  width: 24px;
+  height: 22px;
+  position: absolute;
+  top: 31px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: .4s;
+}
+
+.header__toggle-btn:hover {
+  opacity: .6;
+}
+
+@media screen and (min-width: 768px) {
+  .header__toggle-btn {
+    display: none;
+  }
+}

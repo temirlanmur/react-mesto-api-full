@@ -1,0 +1,21 @@
+.card {
+  width: 282px;
+  margin-top: 20px;
+  position: relative;
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 425px) {
+  .card {
+    margin: 20px 8.5px 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card {
+    margin: 20px 0 0;
+  }
+}

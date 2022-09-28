@@ -1,0 +1,9 @@
+.register__submit-btn {
+  margin: 173px 0 20px;
+}
+
+@media screen and (min-width: 1280px) {
+  .register__submit-btn {
+    margin-top: 216px;
+  }
+}
