@@ -12,7 +12,7 @@ const useMainRouter = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const notFoundHandler = require('./middlewares/notFoundHandler');
 
-const { NODE_ENV = 'development', PORT = 3000 } = process.env;
+const { NODE_ENV = 'development', PORT = 3001 } = process.env;
 
 const isDevelopment = NODE_ENV === 'development';
 
