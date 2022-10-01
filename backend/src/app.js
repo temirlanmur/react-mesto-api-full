@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const { errors } = require('celebrate');
 const useMainRouter = require('./routes');
+const cors = require('./middlewares/cors');
 const errorHandler = require('./middlewares/errorHandler');
 const notFoundHandler = require('./middlewares/notFoundHandler');
 
@@ -34,6 +35,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const morganFormat = isDevelopment ? 'dev' : 'common';
 app.use(morgan(morganFormat));
+
+app.use(cors);
 
 useMainRouter(app);
 
