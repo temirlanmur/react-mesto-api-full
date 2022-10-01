@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import logoPath from '../images/logo.svg';
 
-function Header(props) {
+function Header({
+  isLoggedIn,
+  onLogout,
+}) {
+  const currentUser = useContext(CurrentUserContext);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const location = useLocation();
-  const path = location.pathname;
+  const path = useLocation().pathname;
 
-  const history = useHistory();
-
-  const isLoggedIn = props.isLoggedIn;
-
-  let link = {
+  const link = {
     address: '',
     text: ''
   }
@@ -32,8 +33,7 @@ function Header(props) {
   }
 
   function handleLogout() {
-    props.onLogout();
-    history.push('/sign-in');
+    onLogout();
   }
 
   return (
@@ -58,7 +58,7 @@ function Header(props) {
               <span className="header__bar"></span>
             </button>
             <ul className={`header__link-items ${isMenuOpen && 'header__link-items_active'}`}>
-              <li className="header__link-item">{props.email}</li>
+              <li className="header__link-item">{currentUser.email}</li>
               <li className="header__link-item">
                 <button className="link" onClick={handleLogout}>Выйти</button>
               </li>

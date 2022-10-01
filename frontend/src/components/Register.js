@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import TextInput from "./TextInput";
-import * as mestoAuth from "../mestoAuth.js";
+import * as mestoAuth from "../utils/mestoAuth.js";
 
 function Register(props) {
   const [email, setEmail] = useState('');
@@ -19,16 +19,21 @@ function Register(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    mestoAuth.register(email, pwd).then((res) => {
-      if (!res || !res.data) {
+    mestoAuth.register(email, pwd)
+      .then((response) => {
+        if (!response) {
+          props.onError();
+        } else {
+          props.onSuccess();
+          setEmail('');
+          setPwd('');
+          history.push('/sign-in');
+        }
+      })
+      .catch((err) => {
         props.onError();
-      } else {
-        props.onSuccess();
-        setEmail('');
-        setPwd('');
-        history.push('/sign-in');
-      }
-    })
+        console.log(err);
+      })
   }
 
   return (

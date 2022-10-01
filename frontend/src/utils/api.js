@@ -3,6 +3,11 @@ class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
     this._headers = config.headers;
+
+    let token = localStorage.getItem('token');
+    if (token) {
+      this._headers['Authorization'] = `Bearer ${token}`;
+    }
   }
 
   _handleResponse = response => {
@@ -11,6 +16,11 @@ class Api {
     }
 
     return Promise.reject(`Ошибка: ${response}`);
+  }
+
+  // sets authorization header
+  setAuthToken(token) {
+    this._headers['Authorization'] = `Bearer ${token}`;
   }
 
   // gets user info
@@ -106,10 +116,9 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/cohort-40',
+  baseUrl: 'http://localhost:3001',
   headers: {
-    authorization: '676c0732-35dd-41a8-a513-8cdd7e2d2f94',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   }
 });
 
