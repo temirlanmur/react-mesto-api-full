@@ -1,15 +1,16 @@
 import Popup from "./Popup";
 
-function ImagePopup(props) {
-  const isOpen = props.card ? true : false;
+function ImagePopup({ card, onClose }) {
+  const isOpen = card ? true : false;
 
   return (
-    <Popup isOpen={isOpen} onClose={props.onClose} hasImage={true}>
+    <Popup isOpen={isOpen} onClose={onClose} hasImage={true}>
       <img
         className="popup__image"
-        src={props.card?.link}
-        alt={props.card?.name}
+        src={card?.link}
+        alt={card?.name}
       />
+      <p className="popup__img-caption">{card?.name}</p>
     </Popup>
   );
 }
