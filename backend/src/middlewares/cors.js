@@ -1,17 +1,10 @@
-const { NODE_ENV = 'development' } = process.env;
-
-const isDevelopment = NODE_ENV === 'development';
-
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
 const allowedCors = [
   'https://praktikum.tk',
   'http://praktikum.tk',
+  'http://localhost:3000',
 ];
-
-if (isDevelopment) {
-  allowedCors.push('http://localhost:3000');
-}
 
 const cors = (req, res, next) => {
   const { origin } = req.headers;

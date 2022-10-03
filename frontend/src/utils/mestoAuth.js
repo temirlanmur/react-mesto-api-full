@@ -11,13 +11,8 @@ const _handleResponse = (response) => {
 const register = (email, pwd) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      email,
-      password: pwd,
-    })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password: pwd }),
   })
   .then(_handleResponse);
 }
@@ -25,13 +20,8 @@ const register = (email, pwd) => {
 const authorize = (email, pwd) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      email,
-      password: pwd,
-    })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password: pwd }),
   })
   .then(_handleResponse);
 }
@@ -42,7 +32,7 @@ const getProfile = (token) => {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-    }
+    },
   })
   .then(_handleResponse);
 }

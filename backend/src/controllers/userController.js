@@ -20,17 +20,7 @@ async function login(req, res, next) {
       { expiresIn: '7d' },
     );
 
-    if (isDevelopment) {
-      res.send({ token });
-    } else {
-      res
-        .cookie('jwt', token, {
-          maxAge: 86400 * 7,
-          httpOnly: true,
-          sameSite: true,
-        })
-        .end();
-    }
+    res.send({ token });
   } catch (err) {
     next(err);
   }

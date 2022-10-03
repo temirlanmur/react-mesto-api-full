@@ -32,7 +32,7 @@ function Register(props) {
       })
       .catch((err) => {
         props.onError();
-        console.log(err);
+        console.log(`Что-то пошло не так: ${err}`);
       })
   }
 

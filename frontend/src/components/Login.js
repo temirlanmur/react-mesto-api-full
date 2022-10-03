@@ -22,17 +22,17 @@ function Login({
     mestoAuth
       .authorize(email, pwd)
       .then((response) => {
-        if (!response) {
-          onError();
-        } else if (response.token) {
+        if (response.token) {
           handleLogin(response.token);
           setEmail('');
           setPwd('');
+        } else {
+          onError();
         }
       })
       .catch((err) => {
         onError();
-        console.log(err);
+        console.log(`Что-то пошло не так: ${err}`);
       });
   }
 

@@ -1,125 +1,99 @@
-// API class definition
 class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
     this._headers = config.headers;
 
-    let token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
       this._headers['Authorization'] = `Bearer ${token}`;
     }
   }
 
-  _handleResponse = response => {
-    if (response.ok) {
-      return response.json();
+  setAuthToken = (token) => this._headers['Authorization'] = `Bearer ${token}`;
+
+  _sendRequest = ({ method = 'GET', url, body = null }) => {
+    const requestOptions = {
+      method,
+      headers: this._headers,
+    };
+
+    if (body) {
+      requestOptions.body = body;
     }
 
-    return Promise.reject(`Ошибка: ${response}`);
-  }
+    return fetch(this._baseUrl + url, requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
 
-  // sets authorization header
-  setAuthToken(token) {
-    this._headers['Authorization'] = `Bearer ${token}`;
+        return Promise.reject(`Ошибка: ${response}`);
+      });
   }
 
   // gets user info
-  getUserInfo() {
-    return fetch(this._baseUrl + '/users/me', {
-      method: 'GET',
-      headers: this._headers
-    })
-      .then(this._handleResponse);
-  }
+  getUserInfo = () => this._sendRequest({ url: '/users/me' });
 
   // gets cards data
-  getCards() {
-    return fetch(this._baseUrl + '/cards', {
-      method: 'GET',
-      headers: this._headers
-    })
-      .then(this._handleResponse);
-  }
+  getCards = () => this._sendRequest({ url: '/cards' });
 
   // gets user info & cards array
-  getData() {
-    return Promise.all([
-      this.getUserInfo(),
-      this.getCards(),
-    ]);
-  }
+  getData = () => Promise.all([
+    this.getUserInfo(),
+    this.getCards(),
+  ]);
 
   // sends request to update user profile
-  updateProfile({ name, about }) {
-    return fetch(this._baseUrl + '/users/me', {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({ name, about })
-    })
-      .then(this._handleResponse);
-  }
+  updateProfile = ({ name, about }) => this._sendRequest({
+    method: 'PATCH',
+    url: '/users/me',
+    body: JSON.stringify({ name, about }),
+  });
 
   // sends request to update profile avatar
-  updateProfileAvatar(avatarLink) {
-    return fetch(this._baseUrl + '/users/me/avatar', {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({ avatar: avatarLink })
-    })
-      .then(this._handleResponse);
-  }
+  updateProfileAvatar = (avatarLink) => this._sendRequest({
+    method: 'PATCH',
+    url: '/users/me/avatar',
+    body: JSON.stringify({ avatar: avatarLink }),
+  });
 
   // sends request to add new card
-  addCard({ name, link }) {
-    return fetch(this._baseUrl + '/cards', {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({ name: name, link: link })
-    })
-      .then(this._handleResponse);
-  }
+  addCard = ({ name, link }) => this._sendRequest({
+    method: 'POST',
+    url: '/cards',
+    body: JSON.stringify({ name, link }),
+  });
 
   // sends request to add like to the card
-  addLikeToCard(cardId) {
-    return fetch(this._baseUrl + '/cards/' + cardId + '/likes', {
-      method: 'PUT',
-      headers: this._headers
-    })
-      .then(this._handleResponse);
-  }
+  addLikeToCard = (cardId) => this._sendRequest({
+    method: 'PUT',
+    url: '/cards/' + cardId + '/likes',
+  });
 
   // sends request to remove like from the card
-  deleteLikeFromCard(cardId) {
-    return fetch(this._baseUrl + '/cards/' + cardId + '/likes', {
-      method: 'DELETE',
-      headers: this._headers
-    })
-      .then(this._handleResponse);
-  }
+  deleteLikeFromCard = (cardId) => this._sendRequest({
+    method: 'DELETE',
+    url: '/cards/' + cardId + '/likes',
+  });
 
   // adds or deletes like from card depending on a given parameter
-  changeLikeCardStatus(cardId, isLiked) {
+  changeLikeCardStatus = (cardId, isLiked) => {
     if (isLiked) {
       return this.addLikeToCard(cardId);
     }
     return this.deleteLikeFromCard(cardId);
-  }
+  };
 
   // sends request to delete card
-  deleteCard(cardId) {
-    return fetch(this._baseUrl + '/cards/' + cardId, {
-      method: 'DELETE',
-      headers: this._headers
-    })
-      .then(this._handleResponse);
-  }
+  deleteCard = (cardId) => this._sendRequest({
+    method: 'DELETE',
+    url: '/cards/' + cardId,
+  });
 }
 
 const api = new Api({
   baseUrl: 'http://localhost:3001',
-  headers: {
-    'Content-Type': 'application/json',
-  }
+  headers: { 'Content-Type': 'application/json' },
 });
 
 export { api };

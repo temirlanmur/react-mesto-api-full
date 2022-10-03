@@ -66,13 +66,13 @@ function App() {
     if (token) {
       mestoAuth
         .getProfile(token)
-        .then(response => {
+        .then((response) => {
           if (response) {
             setIsLoggedIn(true);
             history.push('/');
           }
         })
-        .catch(err => console.log(err))
+        .catch((err) => console.log(`Что-то пошло не так: ${err}`))
         .finally(setIsLoading(false));
     }
   }

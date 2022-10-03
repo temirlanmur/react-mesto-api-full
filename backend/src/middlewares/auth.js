@@ -6,19 +6,13 @@ const { JWT_SECRET, NODE_ENV = 'development' } = process.env;
 const isDevelopment = NODE_ENV === 'development';
 
 const auth = (req, res, next) => {
-  let token = '';
+  const { authorization } = req.headers;
 
-  if (isDevelopment) {
-    const { authorization } = req.headers;
-
-    if (!authorization || !authorization.startsWith('Bearer ')) {
-      throw new UnauthorizedError('Необходима авторизация');
-    }
-
-    token = authorization.replace('Bearer ', '');
-  } else {
-    token = req.cookies.jwt;
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    throw new UnauthorizedError('Необходима авторизация');
   }
+
+  const token = authorization.replace('Bearer ', '');
 
   let payload;
   try {
