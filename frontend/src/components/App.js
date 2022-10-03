@@ -91,10 +91,10 @@ function App() {
     history.push('/sign-in');
   }
 
-  function handleUpdateUser(userData) {
+  function handleUpdateUser({ name, about}) {
     api
-      .updateProfile(userData)
-      .then((userData) => setCurrentUser((prevState) => ({...prevState, userData})))
+      .updateProfile({ name, about })
+      .then((userData) => setCurrentUser((prevState) => ({...prevState, ...userData})))
       .catch((err) => console.log(`Что-то пошло не так: ${err}`))
       .finally((_) => closeAllPopups());
   }
@@ -102,7 +102,7 @@ function App() {
   function handleUpdateAvatar(avatarLink) {
     api
       .updateProfileAvatar(avatarLink)
-      .then((userData) => setCurrentUser((prevState) => ({...prevState, userData})))
+      .then((userData) => setCurrentUser((prevState) => ({...prevState, ...userData})))
       .catch((err) => console.log(`Что-то пошло не так: ${err}`))
       .finally((_) => closeAllPopups());
   }
