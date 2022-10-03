@@ -5,7 +5,7 @@ const { BadRequestError, ForbiddenError, NotFoundError } = require('../utils/err
 
 async function getCards(req, res, next) {
   try {
-    const cards = await Card.find({});
+    const cards = await Card.find({}).sort({ createdAt: 'desc' });
 
     res.send(cards.map((card) => new CardAPIModel(card)));
   } catch (err) {
@@ -32,7 +32,6 @@ async function deleteCard(req, res, next) {
   const userId = req.user._id;
 
   try {
-    // const card = await Card.findByIdAndRemove(cardId);
     const card = await Card.findById(cardId);
 
     if (!card) throw new NotFoundError(`Передан несуществующий id ${cardId} карточки`);
