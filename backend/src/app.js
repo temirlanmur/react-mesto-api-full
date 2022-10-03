@@ -6,12 +6,11 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
 const { errors } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const useMainRouter = require('./routes');
 const cors = require('./middlewares/cors');
 const errorHandler = require('./middlewares/errorHandler');
-const notFoundHandler = require('./middlewares/notFoundHandler');
 
 const { NODE_ENV = 'development', PORT = 3001 } = process.env;
 
@@ -33,17 +32,15 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const morganFormat = isDevelopment ? 'dev' : 'common';
-app.use(morgan(morganFormat));
-
 app.use(cors);
 
+app.use(requestLogger);
 useMainRouter(app);
+app.use(errorLogger);
 
 if (isDevelopment) {
   app.use(errors());
 }
-app.use(notFoundHandler);
 app.use(errorHandler);
 
 app.listen(PORT, () => {

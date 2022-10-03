@@ -3,15 +3,17 @@ const userRouter = require('./userRouter');
 const cardRouter = require('./cardRouter');
 const { login, createUser } = require('../controllers/userController');
 const auth = require('../middlewares/auth');
+const notFoundHandler = require('../middlewares/notFoundHandler');
 const { userSchemas, commonSchemas } = require('../utils/validation');
 
-module.exports = function useMainRouter(app) {
+const useMainRouter = (app) => {
   app.post('/signin', celebrate({
     [Segments.BODY]: Joi.object().keys({
       email: userSchemas.email,
       password: userSchemas.password,
     }),
   }), login);
+
   app.post('/signup', celebrate({
     [Segments.BODY]: Joi.object().keys({
       name: userSchemas.name,
@@ -26,4 +28,8 @@ module.exports = function useMainRouter(app) {
 
   app.use('/users', userRouter);
   app.use('/cards', cardRouter);
+
+  app.use(notFoundHandler);
 };
+
+module.exports = useMainRouter;
