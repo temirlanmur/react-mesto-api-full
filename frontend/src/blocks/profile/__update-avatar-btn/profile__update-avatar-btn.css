@@ -1,0 +1,11 @@
+.profile__update-avatar-btn {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  background-image: url(../../../images/pencil-btn.svg);
+  background-size: 1.625rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 60px;
+  cursor: pointer;
+}

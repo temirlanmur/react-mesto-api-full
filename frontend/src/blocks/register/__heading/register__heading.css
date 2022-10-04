@@ -1,0 +1,11 @@
+.register__heading {
+  margin-bottom: 40px;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .register__heading {
+    font-size: 1.5rem;
+  }
+}

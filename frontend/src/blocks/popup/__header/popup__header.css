@@ -1,0 +1,9 @@
+.popup__header {
+  margin-bottom: 75px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__header {
+    margin-bottom: 54px;
+  }
+}
