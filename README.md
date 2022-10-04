@@ -1,4 +1,12 @@
 # react-mesto-api-full
-Репозиторий для приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями. Бэкенд расположите в директории `backend/`, а фронтенд - в `frontend/`. 
-  
-Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
+
+The repository contains frontend and backend parts of the `Mesto` app.
+Primary features: user registration, authorization, posting, liking, and deleting.
+
+## Installation for local environment
+1) clone the project
+2) `cd` to `/backend` & install dependencies `npm install`
+3) start the dev server `npm run dev`. The server starts at `localhost:3001`
+4) `cd` to `/frontend` & install dependencies `npm install`
+5) start the dev server `npm run start`. The server starts at `localhost:3000`
+6) open `localhost:3000` in browser
