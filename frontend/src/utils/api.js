@@ -1,3 +1,8 @@
+const { NODE_ENV = 'development' } = process.env;
+const isDevelopment = NODE_ENV === 'development';
+
+const BASE_URL = isDevelopment ? 'http://localhost:3001' : 'http://api.smart.apple.nomoredomains.icu/';
+
 class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
@@ -92,7 +97,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://localhost:3001',
+  baseUrl: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
 
