@@ -1,8 +1,8 @@
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
 const allowedCors = [
-  'https://smart.apple.nomoredomains.icu/',
-  'http://smart.apple.nomoredomains.icu/',
+  'https://smart.apple.nomoredomains.icu',
+  'http://smart.apple.nomoredomains.icu',
   'http://localhost:3000',
 ];
 
