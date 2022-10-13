@@ -10,3 +10,8 @@ Primary features: user registration, authorization, posting, liking, and deletin
 4) `cd` to `/frontend` & install dependencies `npm install`
 5) start the dev server `npm run start`. The server starts at `localhost:3000`
 6) open `localhost:3000` in browser
+
+## Project is available at:
+IP 51.250.48.125
+Frontend https://smart.apple.nomoredomains.icu/
+Backend https://api.smart.apple.nomoredomains.icu/
