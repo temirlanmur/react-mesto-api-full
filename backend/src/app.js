@@ -35,6 +35,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors);
 
 app.use(requestLogger);
+// ===========================================
+// for testing purposes
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+// ===========================================
 useMainRouter(app);
 app.use(errorLogger);
 
