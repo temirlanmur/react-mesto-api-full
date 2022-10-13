@@ -1,7 +1,7 @@
 const { NODE_ENV = 'development' } = process.env;
 const isDevelopment = NODE_ENV === 'development';
 
-const BASE_URL = isDevelopment ? 'http://localhost:3001' : 'http://api.smart.apple.nomoredomains.icu';
+const BASE_URL = isDevelopment ? 'http://localhost:3001' : 'https://api.smart.apple.nomoredomains.icu';
 
 const _handleResponse = (response) => {
   if (response.ok) {
