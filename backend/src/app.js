@@ -26,6 +26,7 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(helmet());
+app.use(requestLogger);
 app.use(limiter);
 
 app.use(cookieParser());
@@ -34,7 +35,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors);
 
-app.use(requestLogger);
 // ===========================================
 // for testing purposes
 app.get('/crash-test', () => {
